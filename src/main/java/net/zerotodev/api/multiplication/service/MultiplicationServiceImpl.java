@@ -13,12 +13,20 @@ import org.springframework.util.Assert;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-@RequiredArgsConstructor
 @Service
 public class MultiplicationServiceImpl implements MultiplicationService{
-    private final RandomGeneratorServiceImpl randomGeneratorService;
-    private final MultiplicationResultAttemptRepository attemptRepository;
-    private final UserRepository userRepository;
+    private RandomGeneratorService randomGeneratorService;
+    private MultiplicationResultAttemptRepository attemptRepository;
+    private UserRepository userRepository;
+
+    @Autowired
+    public MultiplicationServiceImpl(final RandomGeneratorService randomGeneratorService,
+                                     final MultiplicationResultAttemptRepository attemptRepository,
+                                     final UserRepository userRepository) {
+        this.randomGeneratorService = randomGeneratorService;
+        this.attemptRepository = attemptRepository;
+        this.userRepository = userRepository;
+    }
 
     @Override
     public Multiplication createRandomMultiplication() {

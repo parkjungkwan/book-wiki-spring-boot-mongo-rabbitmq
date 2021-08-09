@@ -12,18 +12,20 @@ import javax.persistence.Id;
 /**
  * 사용자 정보를 저장하는 클래스
  */
-
+@RequiredArgsConstructor
 @Getter
 @ToString
 @EqualsAndHashCode
 @Entity
-public class User {
+public final class User {
     @Id
     @GeneratedValue
     @Column(name = "USER_ID")
     private Long userId;
-    private String alias;
+    private final String alias;
 
     // JSON/JPA 를 위한 빈 생성자
-    public User() {}
+    protected User() {
+        alias = null;
+    }
 }
